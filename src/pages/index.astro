@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Greeting from '../components/Greeting';
 const pageTitle = "首页";
 ---
 <BaseLayout  pageTitle={pageTitle}>
-  <h2>我要跟王美懿好一辈子！</h2>
+
+  <h2>我！</h2>
+  
+  <Greeting client:visible messages={["Hej", "Hallo", "Hola", "Habari"]} />
 </BaseLayout>
