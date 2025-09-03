@@ -6,7 +6,8 @@ const pageTitle = "我的 Astro 学习博客";
 ---
 <BaseLayout pageTitle={pageTitle}>
     <h1>{pageTitle}</h1>
-   <p>在这里，我将分享我的学习 Astro 的之旅。</p>
+   <p>在这里，我将分享我的de学习 Astro 的之旅。</p>
+   <p>我同时也想认识更多的人，一起成长。<p>
   <ul>
     {allPosts.map((post: any) => <BlogPost url={post.url} title={post.frontmatter.title} />)}
   </ul>
