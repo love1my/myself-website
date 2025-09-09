@@ -1,51 +1,314 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ParallaxScroll from '../components/ParallaxScroll.astro';
+import PortfolioSection from '../components/PortfolioSection.astro';
+
 const pageTitle = "关于我";
 
-const identity = {
-  firstName: "太平洋",
-  country: "中国",
-  occupation: "技术撰稿人",
-  hobbies: ["摄影", "跑步", "读书", "旅行" ],
-};
+// 项目数据
+const projects = [
+  {
+    title: "个人博客系统",
+    description: "使用 Astro 构建的现代化个人博客，具有响应式设计和流畅的动画效果。",
+    icon: "📝",
+    tags: ["Astro", "TypeScript", "CSS3", "响应式"],
+    date: "2024.01",
+    category: "Web开发"
+  },
+  {
+    title: "摄影作品集",
+    description: "展示个人摄影作品的在线画廊，支持分类筛选和模态框查看。",
+    icon: "📸",
+    tags: ["摄影", "JavaScript", "CSS动画", "用户体验"],
+    date: "2024.02",
+    category: "设计"
+  },
+  {
+    title: "粒子动画系统",
+    description: "基于 Canvas 的粒子动画效果，为网站增添动态视觉体验。",
+    icon: "✨",
+    tags: ["Canvas", "JavaScript", "动画", "视觉效果"],
+    date: "2024.03",
+    category: "前端技术"
+  },
+  {
+    title: "响应式视差滚动",
+    description: "实现流畅的滚动视差效果，提升用户浏览体验。",
+    icon: "🎭",
+    tags: ["视差滚动", "CSS3", "JavaScript", "性能优化"],
+    date: "2024.04",
+    category: "交互设计"
+  }
+];
 
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
-const happy = true;
-const finished = true;
-const goal = 3;
-
-const skillColor = "navy";
-const fontWeight = "bold";
-const textCase = "uppercase";
-
+const skills = [
+  { name: "前端开发", level: 90, color: "#00b4d8" },
+  { name: "UI/UX设计", level: 85, color: "#2ec4b6" },
+  { name: "摄影", level: 80, color: "#4facfe" },
+  { name: "动画设计", level: 75, color: "#90e0ef" },
+  { name: "用户体验", level: 88, color: "#48cae4" }
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-   <h1>{pageTitle}</h1>
-  <h2>……和我的新 Astro 网站！</h2>
+  <ParallaxScroll>
+    <div class="about-container">
+      <!-- 英雄区域 -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <div class="hero-text parallax-slow">
+            <h1 class="hero-title">
+              <span class="title-line">你好，我是</span>
+              <span class="title-name">Tom</span>
+              <span class="title-line">，</span>
+            </h1>
+            <div class="hero-subtitle parallax-fast">
+              <span class="typing-text">一个热爱技术与艺术的</span>
+              <div class="typing-words">
+                <span class="word active">开发者</span>
+                <span class="word">设计师</span>
+                <span class="word">摄影师</span>
+                <span class="word">创作者</span>
+              </div>
+            </div>
+            <p class="hero-description parallax-slow">
+              在代码的世界里寻找美感，在镜头中捕捉生活的精彩瞬间。
+              我相信技术与艺术的结合能够创造出令人惊叹的作品。
+            </p>
+            <div class="hero-actions parallax-fast">
+              <a href="/gallery/" class="btn btn-heart">📸 查看作品</a>
+              <a href="/blog/" class="btn btn-rainbow">📝 阅读博客</a>
+            </div>
+          </div>
+          <div class="hero-visual parallax-reverse">
+            <div class="visual-container">
+              <div class="floating-card card-1">
+                <div class="card-icon">💻</div>
+                <div class="card-text">代码</div>
+              </div>
+              <div class="floating-card card-2">
+                <div class="card-icon">📷</div>
+                <div class="card-text">摄影</div>
+              </div>
+              <div class="floating-card card-3">
+                <div class="card-icon">🎨</div>
+                <div class="card-text">设计</div>
+              </div>
+              <div class="floating-card card-4">
+                <div class="card-icon">✨</div>
+                <div class="card-text">创意</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <p>我正在学习 Astro 的入门教程。这是我网站上的第二个页面，也是我自己建立的第一页面！</p>
-  <p>以下是关于我的几个事实：</p>
-<ul>
-  <li>我的名字是{identity.firstName}。</li>
-  <li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
-  {identity.hobbies.length >= 2 &&
-    <li>我的两个习惯：{identity.hobbies[0]}和{identity.hobbies[1]}</li>
+      <!-- 个人介绍 -->
+      <section class="intro-section">
+        <div class="intro-content">
+          <div class="intro-text parallax-slow">
+            <h2 class="section-title">关于我</h2>
+            <div class="intro-paragraphs">
+              <p>
+                我是一名充满热情的开发者，热爱创造美观且实用的数字产品。
+                从代码到设计，从摄影到写作，我享受每一个创造的过程。
+              </p>
+              <p>
+                我相信好的设计不仅仅是视觉上的美，更是用户体验的完美结合。
+                每一行代码，每一个像素，都承载着我对完美的追求。
+              </p>
+              <p>
+                在这个快速发展的数字时代，我始终保持学习的心态，
+                探索新技术，追求新创意，用作品说话。
+              </p>
+            </div>
+          </div>
+          <div class="intro-stats parallax-fast">
+            <div class="stat-item">
+              <div class="stat-number">3+</div>
+              <div class="stat-label">年开发经验</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">完成项目</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">∞</div>
+              <div class="stat-label">学习热情</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 技能展示 -->
+      <section class="skills-section">
+        <div class="skills-content">
+          <h2 class="section-title parallax-slow">我的技能</h2>
+          <div class="skills-grid">
+            {skills.map((skill, index) => (
+              <div class="skill-item parallax-fast" style={`animation-delay: ${index * 0.1}s`}>
+                <div class="skill-header">
+                  <span class="skill-name">{skill.name}</span>
+                  <span class="skill-percentage">{skill.level}%</span>
+                </div>
+                <div class="skill-bar">
+                  <div 
+                    class="skill-progress" 
+                    style={`width: ${skill.level}%; background: ${skill.color};`}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- 作品集展示 -->
+      <PortfolioSection 
+        title="我的作品" 
+        subtitle="探索我的创作世界，每一件作品都承载着独特的创意和精心的设计"
+        projects={projects}
+      />
+
+      <!-- 联系我（仅电话与微信） -->
+      <section class="contact-section">
+        <div class="contact-content">
+          <h2 class="section-title parallax-slow">联系我</h2>
+          <div class="contact-ways">
+            <div class="contact-card">
+              <div class="contact-icon">📞</div>
+              <div class="contact-title">电话</div>
+              <div class="contact-value">请填写你的电话号码</div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">🟩</div>
+              <div class="contact-title">微信</div>
+              <div class="contact-value">扫码添加</div>
+              <div class="wechat-qrcode">微信二维码占位</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </ParallaxScroll>
+</BaseLayout>
+
+<style>
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
-</ul>
-<p>我的技能是：</p>
-<ul>
-  {skills.map((skill) => <li class="skill">{skill}</li>)}
-</ul>
-{happy && <p>我非常乐意学习 Astro！</p>}
 
-{finished && <p>我完成了这节教程！</p>}
+  /* 英雄区域 */
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 5rem 0;
+  }
 
-{goal === 3 ? <p>我的目标是在三天内完成。</p> : <p>我的目标不是 3 天。</p>}
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
 
-  <p>随着我完成更多教程，该站点将更新，所以请继续查看我的旅程将如何进行吧！</p> 
-  </BaseLayout>
+  .hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
 
+  .title-line {
+    display: block;
+    color: #fff;
+  }
 
- 
+  .title-name {
+    display: block;
+    background: linear-gradient(45deg, #00f2fe, #4facfe, #2ec4b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .typing-words { position: relative; display: inline-block; }
+  .word { position: absolute; opacity: 0; color: #00b4d8; font-weight: 700; }
+
+  .hero-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* 视觉元素（去除持续动画） */
+  .hero-visual { position: relative; height: 400px; }
+  .visual-container { position: relative; width: 100%; height: 100%; }
+  .floating-card { position: absolute; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; text-align: center; border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; }
+  .floating-card:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+  .card-1 { top: 20%; left: 10%; }
+  .card-2 { top: 10%; right: 20%; }
+  .card-3 { bottom: 30%; left: 20%; }
+  .card-4 { bottom: 10%; right: 10%; }
+  .card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .card-text { color: #fff; font-weight: 600; }
+
+  /* 介绍区域 */
+  .intro-section { padding: 5rem 0; }
+  .intro-content { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: center; }
+  .section-title { font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 2rem; text-align: center; }
+  .intro-paragraphs p { font-size: 1.1rem; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 1.5rem; }
+  .intro-stats { display: flex; flex-direction: column; gap: 2rem; }
+  .stat-item { text-align: center; padding: 2rem; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
+  .stat-number { font-size: 2.5rem; font-weight: 800; color: #00b4d8; margin-bottom: 0.5rem; }
+  .stat-label { color: rgba(255,255,255,0.8); font-weight: 600; }
+
+  /* 技能区域 */
+  .skills-section { padding: 5rem 0; }
+  .skills-content { max-width: 800px; margin: 0 auto; }
+  .skills-grid { display: grid; gap: 2rem; }
+  .skill-item { opacity: 0; transform: translateX(-50px); animation: slideInLeft 0.8s ease forwards; }
+  @keyframes slideInLeft { to { opacity: 1; transform: translateX(0); } }
+  .skill-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+  .skill-name { color: #fff; font-weight: 600; }
+  .skill-percentage { color: rgba(255,255,255,0.8); }
+  .skill-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+  .skill-progress { height: 100%; border-radius: 4px; transition: width 1s ease; position: relative; }
+  .skill-progress::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: shimmer 2s infinite; }
+  @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+  /* 联系方式（电话与微信） */
+  .contact-section { padding: 5rem 0; text-align: center; }
+  .contact-ways { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto; }
+  .contact-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 1.5rem; backdrop-filter: blur(12px); }
+  .contact-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .contact-title { font-weight: 700; color: #90e0ef; margin-bottom: 0.5rem; }
+  .contact-value { color: rgba(255,255,255,0.95); }
+  .wechat-qrcode { margin-top: 0.75rem; height: 140px; border-radius: 12px; background: repeating-linear-gradient(45deg, #e0f7ff 0, #e0f7ff 10px, #c8efff 10px, #c8efff 20px); display: flex; align-items: center; justify-content: center; color: #003049; font-weight: 700; }
+
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .hero-content { grid-template-columns: 1fr; text-align: center; }
+    .hero-title { font-size: 2.5rem; }
+    .intro-content { grid-template-columns: 1fr; }
+    .intro-stats { flex-direction: row; justify-content: space-around; }
+    .stat-item { padding: 1rem; }
+    .floating-card { position: relative; margin: 1rem; }
+    .visual-container { display: flex; flex-wrap: wrap; justify-content: center; }
+  }
+</style>

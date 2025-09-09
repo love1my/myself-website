@@ -1,0 +1,304 @@
+---
+// 作品集展示组件
+const { title, subtitle, projects } = Astro.props;
+---
+
+<section class="portfolio-section">
+  <div class="portfolio-header">
+    <h2 class="portfolio-title parallax-slow">{title}</h2>
+    <p class="portfolio-subtitle parallax-fast">{subtitle}</p>
+  </div>
+  
+  <div class="portfolio-grid">
+    {projects.map((project, index) => (
+      <div class="portfolio-item parallax-slow" style={`animation-delay: ${index * 0.1}s`}>
+        <div class="project-card">
+          <div class="project-image">
+            <div class="project-placeholder">
+              <div class="placeholder-icon">{project.icon}</div>
+            </div>
+            <div class="project-overlay">
+              <div class="project-actions">
+                <button class="action-btn view-btn">👁️ 查看</button>
+                <button class="action-btn like-btn">❤️ 喜欢</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-content">
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-description">{project.description}</p>
+            
+            <div class="project-tags">
+              {project.tags.map(tag => (
+                <span class="project-tag">{tag}</span>
+              ))}
+            </div>
+            
+            <div class="project-meta">
+              <span class="project-date">📅 {project.date}</span>
+              <span class="project-category">🏷️ {project.category}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .portfolio-section {
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portfolio-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+
+  .portfolio-title {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .portfolio-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .portfolio-item {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideInUp 0.8s ease forwards;
+  }
+
+  @keyframes slideInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .project-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 107, 107, 0.5);
+  }
+
+  .project-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .project-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .placeholder-icon {
+    font-size: 4rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .project-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .action-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .action-btn:hover::before {
+    left: 100%;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  }
+
+  .project-content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+  }
+
+  .project-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .project-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-tag {
+    padding: 4px 12px;
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: auto;
+  }
+
+  .project-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+      padding: 0 1rem;
+    }
+
+    .portfolio-title {
+      font-size: 2.2rem;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+  }
+
+  /* 滚动视差效果 */
+  .parallax-slow {
+    will-change: transform;
+  }
+
+  .parallax-fast {
+    will-change: transform;
+  }
+</style>

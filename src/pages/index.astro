@@ -1,11 +1,136 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ParallaxScroll from '../components/ParallaxScroll.astro';
 import Greeting from '../components/Greeting';
 const pageTitle = "首页";
 ---
-<BaseLayout  pageTitle={pageTitle}>
 
-  <h2>知不足而后勇</h2>
-  
-  <Greeting client:visible messages={["Hej", "Hallo", "Hola", "Habari"]} />
+<BaseLayout pageTitle={pageTitle}>
+  <ParallaxScroll>
+  <div class="hero-section">
+    <h1 class="animate-float parallax-slow">🌟 欢迎来到我的小世界 🌟</h1>
+    <h2 class="animate-pulse parallax-fast">知不足而后勇</h2>
+    
+    <div class="welcome-card card animate-bounce parallax-slow">
+      <div class="greeting-container">
+        <Greeting client:visible messages={["你好", "Hello", "Hola", "Bonjour", "こんにちは"]} />
+      </div>
+      
+      <div class="intro-text">
+        <p>✨ 这里是我的个人空间，记录着学习与成长的点点滴滴</p>
+        <p>🎨 探索技术之美，分享生活感悟</p>
+        <p>📸 用镜头捕捉美好瞬间</p>
+      </div>
+      
+      <div class="action-buttons">
+        <a href="/blog/" class="btn btn-heart">📝 阅读博客</a>
+        <a href="/about/" class="btn btn-rainbow">👋 关于我</a>
+        <a href="/gallery/" class="btn">📸 摄影集</a>
+      </div>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card card parallax-slow">
+        <div class="feature-icon">🚀</div>
+        <h3>技术分享</h3>
+        <p>分享编程心得和技术探索</p>
+      </div>
+      
+      <div class="feature-card card parallax-fast">
+        <div class="feature-icon">📚</div>
+        <h3>学习笔记</h3>
+        <p>记录学习过程中的思考与总结</p>
+      </div>
+      
+      <div class="feature-card card parallax-reverse">
+        <div class="feature-icon">📷</div>
+        <h3>摄影作品</h3>
+        <p>用镜头记录生活的美好瞬间</p>
+      </div>
+    </div>
+  </div>
+  </ParallaxScroll>
 </BaseLayout>
+
+<style>
+  .hero-section {
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .welcome-card {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+  }
+
+  .greeting-container {
+    margin: 2rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .intro-text {
+    margin: 2rem 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .intro-text p {
+    margin: 1rem 0;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .feature-card h3 {
+    color: #fff;
+    margin: 1rem 0;
+    font-size: 1.3rem;
+  }
+
+  .feature-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .action-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn {
+      width: 200px;
+    }
+  }
+</style>
